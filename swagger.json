@@ -1,0 +1,709 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Api Docs",
+        "description": "animaux perdus api docs",
+        "version": "1.0.0",
+        "contact": {
+            "email": "don.karimmansour@gmail.com"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://ar.wikipedia.org/wiki/%D8%B1%D8%AE%D8%B5%D8%A9_%D8%A5%D9%85_%D8%A3%D9%8A_%D8%AA%D9%8A"
+        }
+    },
+    "host": "localhost:3005",
+    "basePath": "/v1/api",
+    "schemes": [
+        "http"
+    ],
+    "tags": [
+        {
+            "name": "Admin",
+            "description": "Everything about your Admin"
+        },
+        {
+            "name": "User",
+            "description": "Everything about your User"
+        },
+        {
+            "name": "Category",
+            "description": "Everything about your Category"
+        },
+        {
+            "name": "Post",
+            "description": "Everything about your Post"
+        },
+        {
+            "name": "Slider",
+            "description": "Everything about your Slider"
+        },
+        {
+            "name": "Notification",
+            "description": "Everything about your Notification"
+        }
+    ],
+
+    "paths": {
+
+       
+
+        "/users/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "user login",
+                "description": "Login. To access your account",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "login",
+                        "in": "body",
+                        "description": "please identify yourself by providing the information requested in the fields below",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "email": {
+                                    "type": "string",
+                                    "example": "don.karimmansour@gmail.com"
+                                },
+                                "password": {
+                                    "type": "string",
+                                    "example": "123456"
+                                }
+                            }
+                           
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "err": {
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "msg": {
+                                    "type": "object",
+                                    "properties": {
+                                        "TOKEN": {
+                                            "type": "string",
+                                            "default": "55555555555555555555555"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                }
+            }
+            
+        },
+
+
+
+ "/users/me": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "user log",
+                "description": "log to database",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "err": {
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "msg": {
+                                    "type": "object",
+                                    "$ref": "#/definitions/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                }
+            },
+
+            "security": [
+                {
+                    "bearerAuth": []
+                }
+            ]
+        },
+
+
+
+
+
+
+        "/user/list": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "get admins list",
+                "description": "get admins list with filters",
+                "operationId": "Get",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort list",
+                        "required": false,
+                        "type": "object",
+                        "default": null
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit list",
+                        "required": false,
+                        "type": "integer",
+                        "default": null
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "description": "skip list",
+                        "required": false,
+                        "type": "integer",
+                        "default": null
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "filter list",
+                        "required": false,
+                        "type": "object",
+                        "default": null
+                    },
+                    {
+                        "name": "expend",
+                        "in": "query",
+                        "description": "expend list",
+                        "required": false,
+                        "type": "string",
+                        "default": null,
+                        "enum": [
+                            "user",
+                            "categoriesId",
+                            "all"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "err": {
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "msg": {
+                                    "type": "object",
+                                    "properties": {
+                                        "limit": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "skip": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "count": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/User"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+
+
+
+
+
+        "/admin/list": {
+            "get": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "get admins list",
+                "description": "get admins list with filters",
+                "operationId": "Get",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "sort list",
+                        "required": false,
+                        "type": "object",
+                        "default": null
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "limit list",
+                        "required": false,
+                        "type": "integer",
+                        "default": null
+                    },
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "description": "skip list",
+                        "required": false,
+                        "type": "integer",
+                        "default": null
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "filter list",
+                        "required": false,
+                        "type": "object",
+                        "default": null
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "err": {
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "msg": {
+                                    "type": "object",
+                                    "properties": {
+                                        "limit": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "skip": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "count": {
+                                            "type": "integer",
+                                            "default": 1
+                                        },
+                                        "value": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Admin"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/admin/create": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "summary": "add new admin",
+                "description": "add new admin to database",
+                "operationId": "Create",
+                "produces": [
+                    "application/json"
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "body",
+                        "description": "title must not be empty",
+                        "required": true,
+                        "type": "string",
+                        "default": "oe"
+                    },
+                    {
+                        "name": "description",
+                        "in": "body",
+                        "description": "description must not be empty",
+                        "required": true,
+                        "type": "string",
+                        "default": "oe..."
+                    },
+                    {
+                        "name": "password",
+                        "in": "body",
+                        "description": "password must not be empty",
+                        "required": true,
+                        "type": "string",
+                        "default": "123..."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "err": {
+                                    "type": "boolean",
+                                    "default": false
+                                },
+                                "msg": {
+                                    "type": "object",
+                                    "properties": {
+                                        "_id": {
+                                            "type": "string",
+                                            "default": "55555555555555555555555"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/ApiResponse"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "petstore_auth": [
+                            "write:pets",
+                            "read:pets"
+                        ]
+                    }
+                ]
+            }
+        }
+      
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+              "type": "http",
+              "in": "header",
+              "name": "Authorization",
+              "description": "Bearer token to access these api endpoints",
+              "scheme": "bearer",
+              "bearerFormat": "JWT"
+            }
+          }
+    },
+
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+   
+    "definitions": {
+        "ApiResponse": {
+            "type": "object",
+            "properties": {
+                "err": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        },
+        "Admin": {
+            "type": "object",
+            "properties": {
+                "fullname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "isAccountActivated": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "fullname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "avatar": {
+                    "type": "imageId"
+                },
+                "isEmailVerified": {
+                    "type": "boolean"
+                },
+                "isAccountActivated": {
+                    "type": "boolean"
+                },
+                "localisation": {
+                    "type": "object",
+                    "properties": {
+                        "longitude": {
+                            "type": "string"
+                        },
+                        "latitude": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "Category": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "visible": {
+                    "type": "boolean"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "Post": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                }, 
+                "signalCount": {
+                    "type": "integer"
+                },
+                "visible": {
+                    "type": "boolean"
+                },
+                "status": {
+                    "type": "boolean"
+                },
+                "image": {
+                    "type": "imageId"
+                },
+                "user": {
+                    "type": "user"
+                },
+                "categoriesId": {
+                    "type": "categoriesId"
+                },
+                "localisation": {
+                    "type": "object",
+                    "properties": {
+                        "longitude": {
+                            "type": "string"
+                        },
+                        "latitude": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "Slider": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "visible": {
+                    "type": "boolean"
+                },
+                "image": {
+                    "type": "imageId"
+                },
+                "post": {
+                    "type": "post"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "Notification": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "post": {
+                    "type": "post"
+                },
+                "createdAt": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "updatedAt": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        }
+    }
+
+  
+}
