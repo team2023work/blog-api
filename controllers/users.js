@@ -19,7 +19,7 @@ const Me = (req, res) => {
     const user = req.user
 
     if (user) {
-        res.status(codes.ok).json({ err: false, msg: user })
+        res.status(codes.ok).json({ result: user })
     } else {
         res.status(codes.badRequest).json({ err: true, msg: "empty" })
     }

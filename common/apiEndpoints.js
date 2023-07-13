@@ -1,5 +1,5 @@
 const Host = {
-    ROOT: !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? "http://localhost:3005" : "https://zaki-06qu.onrender.com",
+    ROOT: !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? "http://localhost:3005" : "https://blog-api-q65b.onrender.com/",
     PREFIX: "/v1/api",
     FRONTEND: !process.env.NODE_ENV || process.env.NODE_ENV === 'development' ? "http://localhost:3000" : "http://localhost:3000",
   }
