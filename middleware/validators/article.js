@@ -5,7 +5,7 @@ const Add = [
     check("description").notEmpty().withMessage("description field is required"),
     check("videoUrl").notEmpty().withMessage("videoUrl field is required"),
     check("visible").notEmpty().withMessage("visible field is required"),
-    check("phpto").notEmpty().withMessage("phpto field is required"),
+    check("photo").notEmpty().withMessage("photo field is required"),
     check("category").notEmpty().withMessage("category field is required"),
     check("tags").notEmpty().withMessage("tags field is required"),
     check("user").notEmpty().withMessage("user field is required"),

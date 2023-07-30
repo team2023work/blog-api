@@ -46,7 +46,7 @@ const Host = {
       },
 
       Article: {
-          route: `${Host.PREFIX}/article`,
+          route: `${Host.PREFIX}/articles`,
           list: `/list`,
           create: `/create`,
           edit: `/edit/:id`,

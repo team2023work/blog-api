@@ -4,6 +4,8 @@ const fs = require("fs")
 
 //create Media
 const createMedia = (req, res) => {
+    console.log(44);
+
     const { filename } = req.file
     const { type } = req.body
 
