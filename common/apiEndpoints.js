@@ -38,7 +38,7 @@ const Host = {
       },
 
       Tags: {
-          route: `${Host.PREFIX}/categories`,
+          route: `${Host.PREFIX}/tags`,
           list: `/list`,
           create: `/create`,
           edit: `/edit/:id`,
