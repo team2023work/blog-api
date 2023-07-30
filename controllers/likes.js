@@ -15,9 +15,9 @@ const Get = (req, res) => {
  
 // add like
 const Add = (req, res) => {
-    const { user , post } = req.body
+    const { user , article } = req.body
  
-    LikesService.Add(user , post).then(result => {
+    LikesService.Add(user , article).then(result => {
         res.status(codes.ok).json({ result })
     }).catch(err => {
         res.status(codes.badRequest).json({ err: true, msg: err?.message || err })
