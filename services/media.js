@@ -6,7 +6,7 @@ const createMedia = (url, type) => {
 
     return new Promise((resolve, reject) => {
 
-            const newMedia = new mediaModel({ m:url, type })
+            const newMedia = new mediaModel({ url, type })
  
             newMedia.save().then(doc => {
                 resolve(doc._id)
