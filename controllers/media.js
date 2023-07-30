@@ -22,7 +22,7 @@ const getMedia = (req , res) => {
 
     mediaService.getMedia(id).then(result => {
         
-        fs.readFile(`../images/${result.url}`, function (err, data) {
+        fs.readFile(`./images/${result.url}`, function (err, data) {
             if (err) res.status(codes.badRequest).json({ err: true, msg: err?.message || err })
             else {
                 res.writeHead(200, { 'Content-Type': 'image/jpeg' })
