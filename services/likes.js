@@ -29,11 +29,11 @@ const Get = ($sort, $limit, $skip, $filter, $expend ) => {
 
 
 // add Like
-const Add = (user, post) => {
+const Add = (user, article) => {
 
     return new Promise((resolve, reject) => { // check Like
 
-        const newLike = new LikesModel({ user, post })
+        const newLike = new LikesModel({ user, article })
 
         newLike.save()
             .then(doc => { resolve(doc["_id"]) })

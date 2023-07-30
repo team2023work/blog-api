@@ -15,9 +15,9 @@ const Get = (req, res) => {
  
 // add comment
 const Add = (req, res) => {
-    const { comment , user , post } = req.body
+    const { comment , user , article } = req.body
 
-    CommentsService.Add(comment , user , post).then(result => {
+    CommentsService.Add(comment , user , article).then(result => {
         res.status(codes.ok).json({ result })
     }).catch(err => {
         res.status(codes.badRequest).json({ err: true, msg: err?.message || err })
