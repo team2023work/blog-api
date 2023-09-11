@@ -17,7 +17,7 @@ router.post(ApiEndpoints.Article.create, authMiddleware, Add, HandleValidatorErr
 router.put(ApiEndpoints.Article.edit, authMiddleware, Edit, HandleValidatorError, ArticleController.Edit , handleError)
 
 // remove
-router.delete(ApiEndpoints.Article.signal, authMiddleware, Delete, HandleValidatorError, ArticleController.Remove, handleError)
+router.delete(ApiEndpoints.Article.delete, authMiddleware, Delete, HandleValidatorError, ArticleController.Remove, handleError)
 
 
 module.exports = router

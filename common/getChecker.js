@@ -4,6 +4,29 @@ const FC = filter => {
 
 
 
+const checkDateFilter = (filter) => {
+    if (!filter) {
+        return {}
+    } else {
+        let newFilter = JSON.parse(filter) 
+
+        if(newFilter.updatedAt){
+            if (newFilter.updatedAt["$gte"] && newFilter.updatedAt["$lte"]) {
+                newFilter.updatedAt["$gte"] = new Date(newFilter.updatedAt["$gte"])
+                newFilter.updatedAt["$lte"] = new Date(newFilter.updatedAt["$lte"])
+            }else if (newFilter.updatedAt["$gte"]) {
+                newFilter.updatedAt["$gte"] = new Date(newFilter.updatedAt["$gte"])
+            } else{
+                newFilter.updatedAt["$lte"] = new Date(newFilter.updatedAt["$lte"])
+            }
+        }
+
+        return newFilter
+    }
+}
+
+
+
 const QC = (s, q) => {
 
     const adminFilter = [ "fullname", "email" ]
@@ -39,4 +62,4 @@ const OC = (skip, limit, sort) => {
 
 
 
-module.exports = { FC , OC , QC }
+module.exports = { FC , OC , QC, checkDateFilter }

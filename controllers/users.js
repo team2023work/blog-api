@@ -19,7 +19,12 @@ const Me = (req, res) => {
     const user = req.user
 
     if (user) {
-        res.status(codes.ok).json({ result: user })
+        UsersService.Me(user._id, user.role).then(result => {
+            res.status(codes.ok).json({ result })
+        }).catch(err => {
+            res.status(codes.badRequest).json({ err: true, msg: err?.message || err })
+        })
+
     } else {
         res.status(codes.badRequest).json({ err: true, msg: "empty" })
     }

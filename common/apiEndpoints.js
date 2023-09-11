@@ -50,7 +50,7 @@ const Host = {
           list: `/list`,
           create: `/create`,
           edit: `/edit/:id`,
-          signal: `/signal/:id`,
+          delete: `/delete/:id`,
       },
 
       Comments: {
