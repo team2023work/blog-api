@@ -19,6 +19,24 @@ const Get = ($sort, $limit, $skip, $filter, $expend, $q) => {
     })
 }
 
+
+const Me = (_id, role) => {
+    return new Promise((resolve, reject) => {
+        // get user
+
+        UsersModel.findById(_id).then((user) => {
+                if (!user) {
+                    reject("the user is not exist");
+                } else {
+                    const TOKEN = JWt.sign({ ...user._doc, role }, process.env.JWT_SECRET, { expiresIn: "7d" })
+                    resolve({ TOKEN })                }
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+
  
 // signup
 const Signup = (fullname, password, email) => {
@@ -162,4 +180,4 @@ const Forgot = (email) => {
  
 
 
-module.exports = { Get, Edit, Reset, Login, Signup, Forgot }
+module.exports = { Get, Edit, Reset, Login, Signup, Forgot, Me }
